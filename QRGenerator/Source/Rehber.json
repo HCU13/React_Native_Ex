@@ -1,0 +1,21 @@
+{
+    "Pharmacy":{
+      "Name":"Hillcrest MOB Pharmacy",
+      "StoreNumber":"254",
+      "Address":{
+        "StreetAddress":"50 Hillcrest Medical Blvd Ste 200-1",
+        "City":"WACO",
+        "State":"TX",
+        "Zip":"76712"
+      },
+      "IsDefault":false
+    },
+    "ReadyForPickups":[
+      {
+        "RxDrugName":"Tizanidine HCL 4mg Caps",
+        "RxNumber":"6000295",
+        "StoreNumber":"254",
+        "PatientPay":"15.59"
+      }
+    ]
+  }
