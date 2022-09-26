@@ -7,7 +7,7 @@ import ScannerScreen from './src/Screens/ScannerScreen';
 export default function App() {
   return (
     <View style={{flex:1}}>
-        <QrScreen/>
+        <ScannerScreen/>
     </View>
   )
 };

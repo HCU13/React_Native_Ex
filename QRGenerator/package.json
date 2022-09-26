@@ -16,7 +16,8 @@
     "react": "18.1.0",
     "react-native": "0.70.1",
     "react-native-qrcode-svg": "^6.1.2",
-    "react-native-svg": "^13.2.0"
+    "react-native-svg": "^13.2.0",
+    "react-native-vision-camera": "^2.14.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
