@@ -7,37 +7,45 @@ import {
   Text,
   TouchableOpacity,
   Linking,
-  View
+  View,
 } from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 
+
+//resetleme denenmedi
+/*
+const resetState = () => {
+  qr('');
+};*/
+
 export default class App extends Component {
   
+  state = {
+    qr: ''
+  }
+
   onSuccess = e => {
-    Linking.openURL(e.data).catch(err =>
-      console.error('An error occured', err)
-    );
+    this.setState({qr : e.data})
   };
+  
 
   render() {
     return (
       <QRCodeScanner
       onRead={this.onSuccess}
-      flashMode={RNCamera.Constants.FlashMode.torch}
       topContent={
         <Text style={styles.centerText}>
           <Text style={styles.textBold}>QR Code Scanner</Text>
         </Text>
       }
       bottomContent={
-        <TouchableOpacity style={styles.buttonTouchable}>
-          <Text style={styles.buttonText}>Back</Text>
+        <TouchableOpacity /*onPress={resetState}   resetleme denenmedi */ style={styles.buttonTouchable}>
+          <Text style={styles.buttonText}>{this.state.qr}</Text>
         </TouchableOpacity>
       }
     />
-
     )
   }
 }
