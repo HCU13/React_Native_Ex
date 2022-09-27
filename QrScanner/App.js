@@ -1,120 +1,63 @@
-import React, { Component } from "react";
 
-import { View, Dimensions, Text } from "react-native";
-import QRCodeScanner from "react-native-qrcode-scanner";
-import Icon from "react-native-vector-icons/Ionicons";
-import * as Animatable from "react-native-animatable";
+import React, { Component } from 'react';
 
-const SCREEN_HEIGHT = Dimensions.get("window").height;
-const SCREEN_WIDTH = Dimensions.get("window").width;
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Linking,
+  View
+} from 'react-native';
 
-console.disableYellowBox = true;
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
 
-class App extends Component {
-  onSuccess(e) {
-    alert(e);
-  }
-
-  makeSlideOutTranslation(translationType, fromValue) {
-    return {
-      from: {
-        [translationType]: SCREEN_WIDTH * -0.18
-      },
-      to: {
-        [translationType]: fromValue
-      }
-    };
-  }
+export default class App extends Component {
+  
+  onSuccess = e => {
+    Linking.openURL(e.data).catch(err =>
+      console.error('An error occured', err)
+    );
+  };
 
   render() {
     return (
       <QRCodeScanner
-        showMarker
-        onRead={this.onSuccess.bind(this)}
-        cameraStyle={{ height: SCREEN_HEIGHT }}
-        customMarker={
-          <View style={styles.rectangleContainer}>
-            <View style={styles.topOverlay}>
-              <Text style={{ fontSize: 30, color: "white" }}>
-                QR CODE SCANNER
-              </Text>
-            </View>
+      onRead={this.onSuccess}
+      flashMode={RNCamera.Constants.FlashMode.torch}
+      topContent={
+        <Text style={styles.centerText}>
+          <Text style={styles.textBold}>QR Code Scanner</Text>
+        </Text>
+      }
+      bottomContent={
+        <TouchableOpacity style={styles.buttonTouchable}>
+          <Text style={styles.buttonText}>Back</Text>
+        </TouchableOpacity>
+      }
+    />
 
-            <View style={{ flexDirection: "row" }}>
-              <View style={styles.leftAndRightOverlay} />
-
-              <View style={styles.rectangle}>
-              
-              </View>
-
-              <View style={styles.leftAndRightOverlay} />
-            </View>
-
-            <View style={styles.bottomOverlay} />
-          </View>
-        }
-      />
-    );
+    )
   }
 }
 
-const overlayColor = "rgba(0,0,0,0.5)"; // this gives us a black color with a 50% transparency
-
-const rectDimensions = SCREEN_WIDTH * 0.65; // this is equivalent to 255 from a 393 device width
-const rectBorderWidth = SCREEN_WIDTH * 0.005; // this is equivalent to 2 from a 393 device width
-const rectBorderColor = "red";
-
-const scanBarWidth = SCREEN_WIDTH * 0.46; // this is equivalent to 180 from a 393 device width
-const scanBarHeight = SCREEN_WIDTH * 0.0025; //this is equivalent to 1 from a 393 device width
-const scanBarColor = "#22ff00";
-
-
-const styles = {
-  rectangleContainer: {
+const styles = StyleSheet.create({
+  centerText: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "transparent"
+    fontSize: 18,
+    padding: 32,
+    color: '#777'
   },
-
-  rectangle: {
-    height: rectDimensions,
-    width: rectDimensions,
-    borderWidth: rectBorderWidth,
-    borderColor: rectBorderColor,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "transparent"
+  textBold: {
+    fontWeight: '500',
+    color: '#000'
   },
-
-  topOverlay: {
-    flex: 1,
-    height: SCREEN_WIDTH,
-    width: SCREEN_WIDTH,
-    backgroundColor: overlayColor,
-    justifyContent: "center",
-    alignItems: "center"
+  buttonText: {
+    fontSize: 21,
+    color: 'rgb(0,122,255)'
   },
-
-  bottomOverlay: {
-    flex: 1,
-    height: SCREEN_WIDTH,
-    width: SCREEN_WIDTH,
-    backgroundColor: overlayColor,
-    paddingBottom: SCREEN_WIDTH * 0.25
-  },
-
-  leftAndRightOverlay: {
-    height: SCREEN_WIDTH * 0.65,
-    width: SCREEN_WIDTH,
-    backgroundColor: overlayColor
-  },
-
-  scanBar: {
-    width: scanBarWidth,
-    height: scanBarHeight,
-    backgroundColor: scanBarColor
+  buttonTouchable: {
+    padding: 16
   }
-};
-
-export default App;
+});

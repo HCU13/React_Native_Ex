@@ -1,6 +1,9 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+permissions_path = '../node_modules/react-native-permissions/ios'
 
+
+pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
 platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
 
@@ -9,6 +12,7 @@ target 'QrScanner' do
 
   # Flags change depending on the env values.
   flags = get_default_flags()
+  
 
   use_react_native!(
     :path => config[:reactNativePath],
