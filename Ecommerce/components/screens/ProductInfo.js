@@ -13,7 +13,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import {COLOURS, Items} from '../database/Database';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const width = Dimensions.get('window').width;
 
@@ -22,8 +22,6 @@ const ProductInfo = ({route, navigation}) => {
   const {productsID} = route.params;
   const [product, setProduct] = useState({});
 
-  const scroolX = new Animated.Value(0);
-  let position = Animated.divide(scroolX.width)
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -65,7 +63,7 @@ const ProductInfo = ({route, navigation}) => {
           <View style={styles.TopArea}>
             <TouchableOpacity  onPress={() =>
          navigation.navigate('Home')}>
-              <Text style={styles.backButtonText}>Back</Text>
+              <MaterialCommunityIcons name="backspace-outline" style={styles.backButtonText} />
             </TouchableOpacity>
           </View>
           <FlatList   
@@ -90,11 +88,11 @@ const ProductInfo = ({route, navigation}) => {
           <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginVertical:14, borderBottomColor:COLOURS.backgroundLight,borderBottomWidth:3,paddingBottom:20}}>
             <View style={{flexDirection:'row',width:'80%',alignItems:'center'}}>
               <View style={styles.location}>
-              <Text>!!!!</Text>
+              <MaterialCommunityIcons name="location-enter" size={20} color="black" />
               </View>
             <Text>Rustaveli ave 57,{'\n'} 17-001, Batume</Text>
             </View>
-              <Text style={{fontSize:20,color:COLOURS.backgroundDark}}>--></Text>
+            <MaterialCommunityIcons name="arrow-collapse-right" size={24} color="black"  />
           </View>
           <View style={styles.PriceArea}>
             <Text style={styles.Price}>$ {product.productPrice}.00</Text>
@@ -143,10 +141,9 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   backButtonText: {
-    fontSize: 18,
+    fontSize: 25,
     color: COLOURS.backgroundDark,
     padding: 12,
-    backgroundColor: COLOURS.white,
     borderRadius: 10,
   },
   image: {
