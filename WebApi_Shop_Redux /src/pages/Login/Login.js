@@ -13,7 +13,6 @@ import Button from '../../components/Button/Button';
 import {Formik} from 'formik';
 import usePost from '../../hooks/usePost/usePost';
 import Config from 'react-native-config';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -28,8 +27,7 @@ const Login = ({navigation}) => {
     if (data.status === 'error') {
       Alert.alert('Kullanıcı bulunamadı');
     } else {
-      AsyncStorage.setItem('@USER', JSON.stringify(user))
-      navigation.navigate('ProductPage');
+      dispatchEvent({type:'SET_USER', payload:{user}})
     }
   }
 
